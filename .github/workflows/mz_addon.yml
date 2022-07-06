@@ -1,0 +1,21 @@
+name: Publish to Mozilla
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: trmcnvn/firefox-addon@v1
+        with:
+          # uuid is only necessary when updating an existing addon,
+          # omitting it will create a new addon
+          uuid: '{6f54ad3f-042f-408f-8f06-ab631fe1a64f}'
+          xpi: build/my-addon.xpi
+          manifest: manifest.json
+          api-key: ${{ secrets.FIREFOX_API_KEY }}
+          api-secret: ${{ secrets.FIREFOX_API_SECRET }}
