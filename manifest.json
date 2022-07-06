@@ -3,21 +3,20 @@
     "name": "JustDeleteMe",
     "version": "0.0.1",
     "icons": {
-        "128": "res/ico128.png"
+        "128": "res/ext_icon_144.png"
     },
-    "content_scripts": [
-        {
-            "matches": ["http://*/*", "https://*/*"],
-            "js": ["js/changeIcon.js"]
-        }
-    ],
     "browser_action": {
         "default_icon": {
-            "16": "icons/"
-        }
+            "144": "res/ext_icon_144.png"
+        },
+        "default_popup": "pub/index.html"
     },
     "permissions": [
+        "activeTab",
         "<all_urls>"
     ],
-    "defaultDocument": "pub/index.html"
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": true
+    }
 }
