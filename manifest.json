@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "JustDeleteMe",
+    "version": "0.0.1",
+    "icons": {
+        "128": "res/ico128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["js/changeIcon.js"]
+        }
+    ],
+    "browser_action": {
+        "default_icon": {
+            "16": "icons/"
+        }
+    },
+    "permissions": [
+        "<all_urls>"
+    ],
+    "defaultDocument": "pub/index.html"
+}
