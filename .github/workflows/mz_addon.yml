@@ -1,0 +1,31 @@
+name: Publish to Mozilla
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Install web-ext
+      - uses: actions/checkout@v2
+        name: Install web-ext
+      - run: |
+          npm install -g web-ext
+        name: Install webext
+      # Build the addon
+      - uses: actions/checkout@v2
+        name: Build the addon
+      - run: |
+          web-ext build -o -n justdeleteme.xpi
+        name: Build the addon
+      - uses: trmcnvn/firefox-addon@v1
+        with:
+          # uuid is only necessary when updating an existing addon,
+          # omitting it will create a new addon
+          uuid: '{6f54ad3f-042f-408f-8f06-ab631fe1a64f}'
+          xpi: web-ext-artifacts/justdeleteme.xpi
+          manifest: manifest.json
+          api-key: ${{ secrets.FIREFOX_API_KEY }}
+          api-secret: ${{ secrets.FIREFOX_API_SECRET }}

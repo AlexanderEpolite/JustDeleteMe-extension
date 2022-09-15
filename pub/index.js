@@ -59,20 +59,20 @@ const subdomains = ['www', 'support', 'mail', 'ssl', 'new', 'cgi1', 'en', 'myacc
             //this should be easy to translate if you feel up to it.
             switch(difficulty) {
                 case "easy":
-                    difficulty_string = "It is <b>easy</b> to delete your account for <b>${base}</b>!";
+                    difficulty_string = `It is <b>easy</b> to delete your account for <b>${base}</b>!`;
                     break;
                 case "medium":
                     //replace medium with moderately difficult
-                    difficulty_string = "It is <b>moderately difficult</b> to delete your account for <b>${base}</b>!";
+                    difficulty_string = `It is <b>moderately difficult</b> to delete your account for <b>${base}</b>!`;
                     break;
                 case "hard":
-                    difficulty_string = "It is <b>hard</b> to delete your account for <b>${base}</b>!";
+                    difficulty_string = `It is <b>hard</b> to delete your account for <b>${base}</b>!`;
                     break;
                 case "impossible":
-                    difficulty_string = "It is <b>impossible</b> to delete your account for <b>${base}</b>!";
+                    difficulty_string = `It is <b>impossible</b> to delete your account for <b>${base}</b>!`;
                     break;
                 case "limited":
-                    difficulty_string = "There is <b>limited availability</b> in account deletion for <b>${base}</b> (see Notes).";
+                    difficulty_string = `There is <b>limited availability</b> in account deletion for <b>${base}</b> (see Notes).`;
                     break;
                 default:
                     difficulty_string = `It is <b>${difficulty}</b> to delete your account for <b>${base}</b>!`;
