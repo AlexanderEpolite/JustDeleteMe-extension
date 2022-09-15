@@ -10,8 +10,8 @@ const subdomains = ['www', 'support', 'mail', 'ssl', 'new', 'cgi1', 'en', 'myacc
      * Search for the site and return the difficulty
      *
      * @param domain {string}
-     * @param query {string} the query (instead of the "difficulty" parameter).
-     * @returns {"easy" | "medium" | "hard" | "impossible" | undefined} the difficulty, or undefined if there is none.
+     * @param query {"difficulty" | "notes"} the query (instead of the "difficulty" parameter).
+     * @returns {"easy" | "medium" | "hard" | "impossible" | "limited" | undefined} the difficulty, or undefined if there is none.
      */
     function searchForSite(domain, query = "difficulty") {
         for(const site of json) {
@@ -53,8 +53,35 @@ const subdomains = ['www', 'support', 'mail', 'ssl', 'new', 'cgi1', 'en', 'myacc
                 return;
             }
             
-            document.getElementById("difficulty").innerHTML = `It is <b>${difficulty.replace("medium", "moderately difficult")}</b> to delete your account for <b>${base}</b>!`;
+            let difficulty_string;
             
+            //switch the difficulty to generate a message.
+            //this should be easy to translate if you feel up to it.
+            switch(difficulty) {
+                case "easy":
+                    difficulty_string = "It is <b>easy</b> to delete your account for <b>${base}</b>!";
+                    break;
+                case "medium":
+                    //replace medium with moderately difficult
+                    difficulty_string = "It is <b>moderately difficult</b> to delete your account for <b>${base}</b>!";
+                    break;
+                case "hard":
+                    difficulty_string = "It is <b>hard</b> to delete your account for <b>${base}</b>!";
+                    break;
+                case "impossible":
+                    difficulty_string = "It is <b>impossible</b> to delete your account for <b>${base}</b>!";
+                    break;
+                case "limited":
+                    difficulty_string = "There is <b>limited availability</b> in account deletion for <b>${base}</b> (see Notes).";
+                    break;
+                default:
+                    difficulty_string = `It is <b>${difficulty}</b> to delete your account for <b>${base}</b>!`;
+                    break;
+            }
+            
+            document.getElementById("difficulty").innerHTML = difficulty_string;
+            
+            //if the difficulty is impossible, don't bother trying to show an account deletion link
             if(difficulty !== "impossible") {
                 document.getElementById("link").hidden = false;
                 document.getElementById("link").href = searchForSite(base, "url");
